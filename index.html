@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Flock – Premium poultry farm management & marketing platform. Apple 2026 design meets ethical chicken farming.">
+    <meta name="theme-color" content="#F5F2EB">
+    <title>Flock – Raise better. Sell smarter.</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="assets/images/hero/hero_background.jpg">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/images/icons/footer_icon.jpg" alt="Flock" class="nav-logo-icon" width="32" height="32">
+                <span class="nav-logo-text">Flock</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#product" class="nav-link">Product</a>
+                <a href="#insights" class="nav-link">Insights</a>
+                <a href="#stories" class="nav-link">Farm Stories</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+            </div>
+            <button class="nav-cta">Get Started →</button>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Raise better.<br>Sell smarter.</h1>
+            <p class="hero-subtitle">The new standard in poultry farm management & marketing.</p>
+            <button class="hero-cta">See the platform →</button>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+<!-- Business Badge (Sticky) -->
+<div class="business-badge" id="businessBadge">
+    <div class="business-name">
+        <i class="fas fa-store"></i>
+        Aspire Poultry Farm
+    </div>
+    <div class="status-indicator">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Checking hours...</span>
+    </div>
+    <div class="rating-badge">
+        <span class="rating-stars">★★★★</span>
+        <span>4.05</span>
+        <span style="opacity:0.6;">(28 reviews)</span>
+    </div>
+</div>
+
+<!-- Hero Quote Section (Aspire's Mission) -->
+<section class="mission-quote" style="padding: 60px 32px; background: var(--apple-cream);">
+    <div class="container" style="max-width: 900px; text-align: center;">
+        <i class="fas fa-quote-left" style="font-size: 48px; color: var(--apple-amber); opacity: 0.5; margin-bottom: 24px; display: inline-block;"></i>
+        <p style="font-size: clamp(20px, 4vw, 28px); font-weight: 500; line-height: 1.4; margin-bottom: 24px;">
+            "For quality improved kienyeji chicken, chicks, fertilized eggs, Healthy jogooo's, Poultry farming guidance, Treatment of Poultry diseases and eggs for sale at wholesale price."
+        </p>
+        <p style="font-size: 16px; opacity: 0.7;">
+            Customer's satisfaction is my priority. Welcome all.
+        </p>
+        <div style="margin-top: 24px;">
+            <span style="background: var(--apple-amber); color: white; padding: 4px 12px; border-radius: 100px; font-size: 12px;">✓ Google Guaranteed</span>
+            <span style="background: var(--apple-sage); color: white; padding: 4px 12px; border-radius: 100px; font-size: 12px; margin-left: 8px;">🐔 Verified Farm</span>
+        </div>
+    </div>
+</section>
+
+<!-- Business Info Grid -->
+<section class="container" style="padding: 60px 32px;">
+    <h2 class="section-title">Visit or Contact</h2>
+    <p class="section-subtitle">Premium poultry products & services in Nakuru</p>
+    
+    <div class="business-info-grid">
+        <!-- Address Card -->
+        <div class="info-card">
+            <div class="info-icon"><i class="fas fa-location-dot"></i></div>
+            <div class="info-title">LOCATION</div>
+            <div class="info-content">@Aspire_poultry006, Nakuru</div>
+            <a href="https://maps.apple.com/?address=@Aspire_poultry006,Nakuru" class="info-action" target="_blank">
+                Get Directions <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <!-- Phone Card -->
+        <div class="info-card">
+            <div class="info-icon"><i class="fas fa-phone"></i></div>
+            <div class="info-title">CONTACT</div>
+            <div class="info-content">0728 136574</div>
+            <a href="tel:0728136574" class="info-action">
+                Call Now <i class="fas fa-phone"></i>
+            </a>
+        </div>
+        
+        <!-- Hours Card -->
+        <div class="info-card">
+            <div class="info-icon"><i class="fas fa-clock"></i></div>
+            <div class="info-title">HOURS</div>
+            <div class="hours-timeline" id="hoursTimeline">
+                <!-- JS will populate -->
+            </div>
+        </div>
+        
+        <!-- Services Card -->
+        <div class="info-card">
+            <div class="info-icon"><i class="fas fa-seedling"></i></div>
+            <div class="info-title">WE OFFER</div>
+            <div class="info-content">
+                <ul style="list-style: none; margin-top: 8px;">
+                    <li>✓ Kienyeji chicken</li>
+                    <li>✓ Chicks & fertilized eggs</li>
+                    <li>✓ Healthy jogoo's</li>
+                    <li>✓ Poultry treatment</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Apple Maps Embed -->
+<section class="container" style="padding: 0 32px 60px;">
+    <div class="map-container">
+        <div class="map-placeholder">
+            <i class="fas fa-map" style="font-size: 48px;"></i>
+            <p><strong>Aspire Poultry Farm</strong><br>@Aspire_poultry006, Nakuru</p>
+            <a href="https://maps.apple.com/?address=@Aspire_poultry006,Nakuru" target="_blank" style="color: var(--apple-amber); text-decoration: none;">
+                Open in Apple Maps <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Google Reviews Showcase -->
+<section class="review-carousel container" style="margin: 0 auto 60px; max-width: 1400px;">
+    <div class="review-header">
+        <h3 style="font-size: 28px; font-weight: 600;">What our customers say</h3>
+        <div class="review-stats">
+            <div class="review-stat">
+                <div class="review-stat-number">4.05</div>
+                <div class="review-stat-label">Google Rating</div>
+            </div>
+            <div class="review-stat">
+                <div class="review-stat-number">28+</div>
+                <div class="review-stat-label">Reviews</div>
+            </div>
+            <div class="review-stat">
+                <div class="review-stat-number">98%</div>
+                <div class="review-stat-label">Would return</div>
+            </div>
+        </div>
+    </div>
+    <div class="review-grid" id="reviewGrid">
+        <!-- JS will populate reviews -->
+    </div>
+</section>
+
+
+    <!-- Split Screen Section -->
+    <section class="split-screen" id="product">
+        <div class="split-left">
+            <div class="split-image-container">
+                <img src="assets/images/dashboard/farmer_dashboard.jpg" alt="Farmer dashboard" class="split-image" loading="lazy">
+                <div class="split-overlay">
+                    <h3>One dashboard. Total control.</h3>
+                    <div class="live-stats" id="liveStats">
+                        <div class="stat-card">
+                            <span class="stat-value" id="eggCount">247</span>
+                            <span class="stat-label">eggs today</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="flockHealth">98</span>
+                            <span class="stat-label">flock health %</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="revenue">1,247</span>
+                            <span class="stat-label">revenue $</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="split-right">
+            <div class="split-image-container">
+                <img src="assets/images/dashboard/consumer_shop.jpg" alt="Consumer shop" class="split-image" loading="lazy">
+                <div class="split-overlay">
+                    <h3>Your story. Their table.</h3>
+                    <button class="mock-add-to-cart">Add to Cart →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Analytics Section – CLEAN OVERLAY ON NEW IMAGE -->
+<section class="analytics" id="insights">
+    <div class="analytics-background">
+        <!-- Your new clean image (no gibberish) -->
+        <img src="assets/images/analytics/ipad_in_hen_house.jpg" alt="iPad analytics dashboard" class="analytics-image" loading="eager">
+        
+        <!-- PURE HTML/CSS OVERLAY – No AI text, perfectly readable -->
+        <div class="ipad-screen-overlay">
+            <div class="screen-title">Precision analytics. Naturally.</div>
+            <div class="screen-stats-row">
+                <div class="screen-stat">
+                    <div class="screen-stat-value">247</div>
+                    <div class="screen-stat-label">eggs/day</div>
+                </div>
+                <div class="screen-stat">
+                    <div class="screen-stat-value">98%</div>
+                    <div class="screen-stat-label">health</div>
+                </div>
+                <div class="screen-stat">
+                    <div class="screen-stat-value">-12%</div>
+                    <div class="screen-stat-label">feed waste</div>
+                </div>
+            </div>
+            <div class="screen-divider"></div>
+            <div class="screen-metric">
+                <span class="screen-metric-label">Temperature</span>
+                <span class="screen-metric-value">68°F</span>
+            </div>
+            <div class="screen-metric">
+                <span class="screen-metric-label">Humidity</span>
+                <span class="screen-metric-value">54%</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Glass card remains as backup/desktop layout -->
+    <div class="analytics-content">
+        <div class="glass-card">
+            <h2 class="analytics-title">Precision analytics.<br>Naturally.</h2>
+            <div class="analytics-stats">
+                <div class="analytics-stat">
+                    <div class="analytics-stat-value" id="dailyEggs">247</div>
+                    <div class="analytics-stat-label">eggs/day</div>
+                </div>
+                <div class="analytics-stat">
+                    <div class="analytics-stat-value" id="healthScore">98%</div>
+                    <div class="analytics-stat-label">flock health</div>
+                </div>
+                <div class="analytics-stat">
+                    <div class="analytics-stat-value" id="feedWaste">-12%</div>
+                    <div class="analytics-stat-label">feed waste</div>
+                </div>
+            </div>
+            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--apple-warm-gray);">
+                <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px;">
+                    <span>🌡️ Temperature</span>
+                    <span><strong>68°F</strong></span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 14px;">
+                    <span>💧 Humidity</span>
+                    <span><strong>54%</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Product Grid -->
+    <section class="products" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Designed for the modern farm.</h2>
+            <p class="section-subtitle">Tools that work as hard as you do.</p>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="assets/images/products/product_card_1.jpg" alt="Brooder Climate Monitor" class="product-image" loading="lazy">
+                    </div>
+                    <h3 class="product-title">Brooder Climate Monitor</h3>
+                    <p class="product-description">Real-time temperature and humidity tracking for optimal chick health.</p>
+                    <a href="#" class="product-link">Learn more →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="assets/images/products/product_card_2.jpg" alt="Egg Smart Sensor" class="product-image" loading="lazy">
+                    </div>
+                    <h3 class="product-title">Egg Smart Sensor</h3>
+                    <p class="product-description">Automated counting and quality monitoring for every egg laid.</p>
+                    <a href="#" class="product-link">Learn more →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="assets/images/products/product_card_3.jpg" alt="Flock Health Wearable" class="product-image" loading="lazy">
+                    </div>
+                    <h3 class="product-title">Flock Health Wearable</h3>
+                    <p class="product-description">Monitor activity and detect illness before symptoms appear.</p>
+                    <a href="#" class="product-link">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial" id="stories">
+        <div class="testimonial-container">
+            <div class="testimonial-image">
+                <img src="assets/images/testimonials/testimonial_portrait.jpg" alt="Sarah, 3rd generation farmer" loading="lazy">
+            </div>
+            <div class="testimonial-content">
+                <div class="testimonial-quote">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="quote-text">Our egg sales doubled. Not because we yelled louder, but because our story finally looked as good as our hens.</p>
+                    <div class="quote-author">— Sarah, 3rd generation farmer</div>
+                    <div class="quote-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="assets/images/icons/footer_icon.jpg" alt="Flock" class="footer-icon" width="48" height="48">
+                <p class="footer-tagline">Farm smarter.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <a href="#">Features</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">Integrations</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="#">Blog</a>
+                    <a href="#">Guides</a>
+                    <a href="#">Support</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Press</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Fresh eggs, fresh insights</h4>
+                <p>Weekly farming tips and product updates.</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" placeholder="your@email.com" required>
+                    <button type="submit">Subscribe →</button>
+                </form>
+                <div class="newsletter-success" id="newsletterSuccess">Thanks for subscribing! 🐔</div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Flock. All rights reserved. Designed for the modern farm.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

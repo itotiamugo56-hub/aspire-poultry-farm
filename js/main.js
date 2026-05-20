@@ -151,7 +151,6 @@ productCards.forEach((card, index) => {
 // Lazy loading images
 const images = document.querySelectorAll('img[loading="lazy"]');
 if ('loading' in HTMLImageElement.prototype) {
-    // Native lazy loading supported
     images.forEach(img => {
         img.loading = 'lazy';
     });
@@ -161,7 +160,6 @@ if ('loading' in HTMLImageElement.prototype) {
 document.addEventListener('DOMContentLoaded', () => {
     document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
     
-    // Preload hero image for performance
     const heroImage = new Image();
     heroImage.src = 'assets/images/hero/hero_background.jpg';
 });
@@ -181,17 +179,18 @@ const businessHours = {
     sunday: { open: null, close: null, isOpen: false }
 };
 
-// Get current status
+// Get current status - FIXED (removed toLocaleDateString error)
 function getBusinessStatus() {
     const now = new Date();
-    const dayName = now.toLocaleDateString('en-US', { weekday: 'lowercase' });
+    const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const dayName = dayNames[now.getDay()];
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
     const currentTimeDecimal = currentHour + currentMinute / 60;
     
     const todayHours = businessHours[dayName];
     
-    if (!todayHours.isOpen) {
+    if (!todayHours || !todayHours.isOpen) {
         return { status: 'closed', text: 'Closed today', nextOpen: 'Monday at 8 AM' };
     }
     
@@ -199,8 +198,8 @@ function getBusinessStatus() {
     
     if (isOpen) {
         const closeHour = todayHours.close;
-        const closeMinute = todayHours.close % 1 * 60;
-        const closeTimeString = `${closeHour}:${closeMinute.toString().padStart(2,'0')}`;
+        const closeMinute = (todayHours.close % 1) * 60;
+        const closeTimeString = `${Math.floor(closeHour)}:${closeMinute.toString().padStart(2, '0')}`;
         return { status: 'open', text: `Open until ${closeTimeString}`, nextOpen: null };
     } else {
         return { status: 'closed', text: `Closed · Opens at ${todayHours.open}:00`, nextOpen: `${todayHours.open}:00` };
@@ -224,19 +223,22 @@ function updateStatusBadge() {
     }
 }
 
-// Render hours timeline
+// Render hours timeline - FIXED (no lowercase error)
 function renderHoursTimeline() {
     const container = document.getElementById('hoursTimeline');
     if (!container) return;
     
     const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-    const today = new Date().toLocaleDateString('en-US', { weekday: 'lowercase' });
+    const now = new Date();
+    const currentDayIndex = now.getDay();
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const todayName = dayNames[currentDayIndex].toLowerCase();
     
     let html = '';
-    days.forEach(day => {
+    days.forEach((day, index) => {
         const hours = businessHours[day];
-        const isToday = day === today;
-        const dayDisplay = day.charAt(0).toUpperCase() + day.slice(1);
+        const isToday = day === todayName;
+        const dayDisplay = dayNames[index];
         
         let hoursDisplay = hours.isOpen ? `${hours.open}:00 – ${hours.close}:00` : 'Closed';
         
@@ -251,7 +253,7 @@ function renderHoursTimeline() {
     container.innerHTML = html;
 }
 
-// Review data (from Google Maps excerpt)
+// Review data
 const googleReviews = [
     {
         rating: 5,
@@ -296,7 +298,7 @@ function renderReviews() {
     container.innerHTML = html;
 }
 
-// Quick actions bar (adds to bottom of page)
+// Quick actions bar
 function addQuickActionsBar() {
     const quickActionsHTML = `
         <div class="quick-actions">
@@ -321,7 +323,6 @@ function addQuickActionsBar() {
     
     document.body.insertAdjacentHTML('beforeend', quickActionsHTML);
     
-    // Add event listeners
     document.getElementById('quickCallBtn')?.addEventListener('click', () => {
         window.location.href = 'tel:0728136574';
     });
@@ -354,7 +355,6 @@ function initBusinessFeatures() {
     renderReviews();
     addQuickActionsBar();
     
-    // Update status every minute
     setInterval(updateStatusBadge, 60000);
 }
 
@@ -365,45 +365,6 @@ if (document.readyState === 'loading') {
     initBusinessFeatures();
 }
 
-// Live clock for iPad overlay
-function updateOverlayTime() {
-    const timeElement = document.getElementById('liveTime');
-    if (timeElement) {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        timeElement.textContent = `${hours}:${minutes}`;
-    }
-}
-
-// Sync overlay stats with main stats
-function syncOverlayStats() {
-    const eggCount = document.getElementById('eggCount')?.innerHTML || '247';
-    const healthScore = document.getElementById('flockHealth')?.innerHTML || '98';
-    const feedWaste = document.getElementById('feedWaste')?.innerHTML || '-12';
-    
-    const overlayEgg = document.getElementById('overlayEggCount');
-    const overlayHealth = document.getElementById('overlayHealth');
-    const overlayFeed = document.getElementById('overlayFeed');
-    
-    if (overlayEgg) overlayEgg.innerHTML = eggCount;
-    if (overlayHealth) overlayHealth.innerHTML = healthScore + '%';
-    if (overlayFeed) overlayFeed.innerHTML = feedWaste + '%';
-}
-
-// Call these functions
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        updateOverlayTime();
-        syncOverlayStats();
-        setInterval(updateOverlayTime, 1000);
-    });
-} else {
-    updateOverlayTime();
-    syncOverlayStats();
-    setInterval(updateOverlayTime, 1000);
-}
-
-// Console greeting (Apple style)
+// Console greeting
 console.log('%c🐔 Flock – Raise better. Sell smarter.', 'color: #D4A259; font-size: 16px; font-weight: bold;');
 console.log('%cDesigned for the modern farm. © 2026', 'color: #8B9A6E; font-size: 12px;');

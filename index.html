@@ -17,6 +17,118 @@
     
     <!-- Font Awesome 6 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Analytics Overlay - Mobile First Responsive */
+        .analytics-overlay {
+            position: absolute;
+            background: rgba(248, 248, 248, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 16px 20px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            border: 0.5px solid rgba(0,0,0,0.08);
+            font-family: -apple-system, 'SF Pro Text', system-ui;
+            text-align: center;
+            width: 88%;
+            max-width: 280px;
+        }
+
+        /* Desktop / Large screens */
+        @media (min-width: 768px) {
+            .analytics-overlay {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 380px;
+                padding: 28px 36px;
+            }
+            
+            .analytics-overlay > div:first-child {
+                font-size: 18px;
+                margin-bottom: 18px;
+            }
+            
+            .analytics-overlay .stat-row {
+                gap: 24px;
+                margin-bottom: 20px;
+            }
+            
+            .analytics-overlay .stat-value {
+                font-size: 28px;
+            }
+            
+            .analytics-overlay .stat-label {
+                font-size: 11px;
+            }
+            
+            .analytics-overlay .temp-humidity {
+                font-size: 14px;
+            }
+        }
+
+        /* Mobile - Better positioning */
+        @media (max-width: 767px) {
+            .analytics-overlay {
+                top: 18%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 88%;
+                max-width: 320px;
+            }
+        }
+
+        /* Force light appearance on hero CTA and analytics overlay regardless of theme */
+        .hero-cta {
+            background: white !important;
+            color: #1C1C1E !important;
+            border: 1px solid #E5E0D8 !important;
+        }
+
+        [data-theme="dark"] .hero-cta {
+            background: white !important;
+            color: #1C1C1E !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .analytics-overlay,
+        .analytics-overlay * {
+            background: rgba(248, 248, 248, 0.95) !important;
+            color: #1C1C1E !important;
+        }
+
+        [data-theme="dark"] .analytics-overlay,
+        [data-theme="dark"] .analytics-overlay * {
+            background: rgba(248, 248, 248, 0.95) !important;
+            color: #1C1C1E !important;
+        }
+
+        /* Map embed sizing + content alignment fix */
+        .map-container {
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .map-placeholder {
+            height: 380px;
+            border-radius: 18px;
+            background: #F5F2EB;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            border: 1px solid #E5E0D8;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .map-placeholder {
+                height: 420px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Dark Mode Toggle -->
@@ -37,7 +149,7 @@
                 <a href="#stories" class="nav-link">Farm Stories</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
             </div>
-            <button class="nav-cta">Get Started →</button>
+            <button class="nav-cta" onclick="document.getElementById('insights').scrollIntoView({ behavior: 'smooth' })">Get Started →</button>
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -53,7 +165,7 @@
         <div class="hero-content">
             <h1 class="hero-title">Raise better.<br>Sell smarter.</h1>
             <p class="hero-subtitle">The new standard in poultry farm management & marketing.</p>
-            <button class="hero-cta">See the platform →</button>
+            <button class="hero-cta" onclick="document.getElementById('insights').scrollIntoView({ behavior: 'smooth' })">See the platform →</button>
         </div>
         <div class="scroll-indicator">
             <i class="fas fa-chevron-down"></i>
@@ -145,19 +257,6 @@
     </div>
 </section>
 
-<!-- Apple Maps Embed -->
-<section class="container" style="padding: 0 32px 60px;">
-    <div class="map-container">
-        <div class="map-placeholder">
-            <i class="fas fa-map" style="font-size: 48px;"></i>
-            <p><strong>Aspire Poultry Farm</strong><br>@Aspire_poultry006, Nakuru</p>
-            <a href="https://maps.apple.com/?address=@Aspire_poultry006,Nakuru" target="_blank" style="color: var(--apple-amber); text-decoration: none;">
-                Open in Apple Maps <i class="fas fa-external-link-alt"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
 <!-- Google Reviews Showcase -->
 <section class="review-carousel container" style="margin: 0 auto 60px; max-width: 1400px;">
     <div class="review-header">
@@ -218,68 +317,43 @@
         </div>
     </section>
 
-<!-- Analytics Section – CLEAN OVERLAY ON NEW IMAGE -->
-<section class="analytics" id="insights">
-    <div class="analytics-background">
-        <!-- Your new clean image (no gibberish) -->
-        <img src="assets/images/analytics/ipad_in_hen_house.jpg" alt="iPad analytics dashboard" class="analytics-image" loading="eager">
+<!-- Analytics Section – FIXED POSITIONING -->
+<section class="analytics" id="insights" style="position: relative; overflow: hidden;">
+    <!-- Container that holds both image and overlay -->
+    <div style="position: relative; width: 100%;">
         
-        <!-- PURE HTML/CSS OVERLAY – No AI text, perfectly readable -->
-        <div class="ipad-screen-overlay">
-            <div class="screen-title">Precision analytics. Naturally.</div>
-            <div class="screen-stats-row">
-                <div class="screen-stat">
-                    <div class="screen-stat-value">247</div>
-                    <div class="screen-stat-label">eggs/day</div>
+        <!-- The image (your clean iPad photo) -->
+        <img src="assets/images/analytics/ipad_in_hen_house.jpg" 
+             alt="iPad analytics dashboard" 
+             style="width: 100%; height: auto; display: block;">
+        
+        <!-- OVERLAY – Positioned ABSOLUTELY on top of the image -->
+        <div class="analytics-overlay">
+            <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #1C1C1E;">
+                Precision analytics. Naturally.
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 16px; margin-bottom: 16px;" class="stat-row">
+                <div>
+                    <div style="font-size: 20px; font-weight: 700; color: #D4A259;" class="stat-value">247</div>
+                    <div style="font-size: 9px; opacity: 0.6;" class="stat-label">eggs/day</div>
                 </div>
-                <div class="screen-stat">
-                    <div class="screen-stat-value">98%</div>
-                    <div class="screen-stat-label">health</div>
+                <div>
+                    <div style="font-size: 20px; font-weight: 700; color: #D4A259;" class="stat-value">98%</div>
+                    <div style="font-size: 9px; opacity: 0.6;" class="stat-label">health</div>
                 </div>
-                <div class="screen-stat">
-                    <div class="screen-stat-value">-12%</div>
-                    <div class="screen-stat-label">feed waste</div>
+                <div>
+                    <div style="font-size: 20px; font-weight: 700; color: #D4A259;" class="stat-value">-12%</div>
+                    <div style="font-size: 9px; opacity: 0.6;" class="stat-label">feed</div>
                 </div>
             </div>
-            <div class="screen-divider"></div>
-            <div class="screen-metric">
-                <span class="screen-metric-label">Temperature</span>
-                <span class="screen-metric-value">68°F</span>
+            <div style="height: 1px; background: #E5E0D8; margin: 12px 0;"></div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;" class="temp-humidity">
+                <span style="opacity: 0.6;">Temperature</span>
+                <span style="font-weight: 600;">68°F</span>
             </div>
-            <div class="screen-metric">
-                <span class="screen-metric-label">Humidity</span>
-                <span class="screen-metric-value">54%</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Glass card remains as backup/desktop layout -->
-    <div class="analytics-content">
-        <div class="glass-card">
-            <h2 class="analytics-title">Precision analytics.<br>Naturally.</h2>
-            <div class="analytics-stats">
-                <div class="analytics-stat">
-                    <div class="analytics-stat-value" id="dailyEggs">247</div>
-                    <div class="analytics-stat-label">eggs/day</div>
-                </div>
-                <div class="analytics-stat">
-                    <div class="analytics-stat-value" id="healthScore">98%</div>
-                    <div class="analytics-stat-label">flock health</div>
-                </div>
-                <div class="analytics-stat">
-                    <div class="analytics-stat-value" id="feedWaste">-12%</div>
-                    <div class="analytics-stat-label">feed waste</div>
-                </div>
-            </div>
-            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--apple-warm-gray);">
-                <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px;">
-                    <span>🌡️ Temperature</span>
-                    <span><strong>68°F</strong></span>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 14px;">
-                    <span>💧 Humidity</span>
-                    <span><strong>54%</strong></span>
-                </div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px;" class="temp-humidity">
+                <span style="opacity: 0.6;">Humidity</span>
+                <span style="font-weight: 600;">54%</span>
             </div>
         </div>
     </div>
